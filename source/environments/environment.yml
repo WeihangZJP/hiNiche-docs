@@ -1,0 +1,54 @@
+# hiNiche main environment (step1_build_reference / step3_run_hiNiche)
+# Requires a Linux machine with an NVIDIA GPU and a driver supporting CUDA 13.
+#
+#   conda env create -f environment.yml
+#   conda activate hiNiche
+#   python -m ipykernel install --user --name hiNiche
+#
+# Nuclei segmentation (step2_build_nuclei_mask) uses StarDist / TensorFlow,
+# which is incompatible with this environment; use environment_stardist.yml.
+name: hiNiche
+channels:
+  - rapidsai
+  - conda-forge
+  - nvidia
+dependencies:
+  - python=3.12
+  - cuda-version=13.2
+
+  # GPU stack
+  - rapids=26.04            # cudf / cuml / cugraph / rmm / cupy
+  - pytorch-gpu=2.12.0
+  - cudnn
+  - cutensor
+  - cusparselt
+
+  # Single-cell / spatial
+  - scanpy=1.12.1
+  - anndata=0.12.17
+
+  # Scientific stack
+  - numpy=2.4
+  - scipy=1.16
+  - pandas=2.3
+  - scikit-learn=1.9
+  - scikit-image=0.26
+  - numba=0.64
+  - matplotlib
+  - tqdm
+
+  # I/O
+  - h5py
+  - pyarrow=24
+  - tifffile=2026.3.3
+  - imagecodecs             # compressed (BigTIFF / .btf) H&E images
+  - zarr=3
+
+  # Notebooks
+  - jupyterlab
+  - ipykernel
+
+  - pip
+  - pip:
+      - rapids-singlecell-cu13==0.15.2
+      - torch-geometric==2.8.0

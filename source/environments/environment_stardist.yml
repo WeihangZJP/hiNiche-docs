@@ -1,0 +1,29 @@
+# Nuclei segmentation environment (step2_build_nuclei_mask)
+# StarDist depends on TensorFlow (numpy < 2), so it is kept separate from the
+# main hiNiche environment.
+#
+#   conda env create -f environment_stardist.yml
+#   conda activate stardist
+#   python -m ipykernel install --user --name stardist
+#
+# On Linux with an NVIDIA GPU, TensorFlow's CUDA libraries are installed via
+# the tensorflow[and-cuda] extra below. On macOS / CPU-only machines, replace
+# it with plain "tensorflow==2.15.1" (Apple Silicon: "tensorflow-macos==2.15.1").
+name: stardist
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=1.26
+  - scipy=1.13
+  - matplotlib
+  - scanpy=1.10
+  - tifffile=2024.8.30      # last tifffile series whose aszarr() works with zarr 2
+  - zarr=2.18
+  - imagecodecs
+  - ipykernel
+  - pip
+  - pip:
+      - tensorflow[and-cuda]==2.15.1   # Keras 2; StarDist/CSBDeep are not Keras-3 ready on TF >= 2.16
+      - csbdeep==0.8.1
+      - stardist==0.9.1
