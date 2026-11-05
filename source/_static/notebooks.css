@@ -1,1 +1,17 @@
 .rst-content .cell-output pre {max-height:360px;overflow:auto;white-space:pre-wrap;} .rst-content img {height:auto;} .wy-nav-content {max-width:1100px;}
+/* Sidebar brand: keep the transparent logo readable above the search field. */
+.wy-side-nav-search { background: #f4f4f8; }
+.wy-side-nav-search > a { color: #25243b; }
+.wy-side-nav-search > a:hover { background: transparent; }
+.wy-side-nav-search > a img.logo {
+  display: block;
+  width: 260px;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  padding: 0;
+  margin: 18px auto 20px;
+  background: transparent;
+  border-radius: 0;
+}
+.wy-side-nav-search .version { color: #55556b; }

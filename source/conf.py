@@ -10,7 +10,11 @@ html_theme_options = {
     'sticky_navigation': True,
     'includehidden': True,
     'titles_only': False,
+    'logo_only': False,
+    'style_nav_header_background': '#f4f4f8',
 }
 exclude_patterns = []
 html_static_path = ['_static']
 html_css_files = ['notebooks.css']
+
+html_logo = "_static/hiNiche-logo.png"
