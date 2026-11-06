@@ -1,4 +1,4 @@
-Multiple slice
+Multiple slices
 ================================================================================
 
 Complete nuclei segmentation and reference preparation before the analysis notebooks. For multiple slices, segment each slice separately and use consistent reference genes and cell-type columns across slices.

@@ -1,4 +1,4 @@
-HD-ST
+Sequencing-based spatial transcriptomics
 ================================================================================
 
 .. toctree::
