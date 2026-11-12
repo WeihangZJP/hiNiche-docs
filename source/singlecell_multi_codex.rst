@@ -1,9 +1,7 @@
 CODEX
 ================================================================================
 
-:download:`Download original notebook <examples/CODEX_run_hiNiche.ipynb>`
-
-Code and saved outputs are reproduced from this notebook. No cells are executed during documentation builds.
+:download:`Download notebook <examples/CODEX_run_hiNiche.ipynb>`
 
 CODEX measures proteins rather than RNA. It is grouped here because it uses the same cell-level, multi-slice workflow.
 

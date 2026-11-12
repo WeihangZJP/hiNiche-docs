@@ -1,9 +1,7 @@
 Mouse brain
 ================================================================================
 
-:download:`Download original notebook <examples/HDST_mousebrain_run_hiNiche.ipynb>`
-
-Code and saved outputs are reproduced from this notebook. No cells are executed during documentation builds.
+:download:`Download notebook <examples/HDST_mousebrain_run_hiNiche.ipynb>`
 
 .. rubric:: hiNiche: Mouse Brain Visium HD analysis
 
@@ -411,7 +409,7 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
 
    import torch
    import torch.nn.functional as F
-   fig, axes = plt.subplots(1, 2, figsize=(6, 3), dpi=600)  # 1行3列
+   fig, axes = plt.subplots(1, 2, figsize=(6, 3), dpi=600)  # 1 row, 2 columns
    
    keys = ["spot", "cell"]
    labels_all = {}
@@ -419,12 +417,12 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
        check = keys[i]
        x_raw, y_raw = adata.obsm["spatial_pixel"][:, 0], adata.obsm["spatial_pixel"][:, 1]
        
-       # 基础概率
+       # Cell-type probabilities
        prob = F.softmax(emb_all[check], dim=1)
        max_prob_raw, max_idx_raw = torch.max(prob, dim=1) 
    
        if check == "cell":
-           # 标准的 Spot -> Cell 映射
+           # Standard spot-to-cell mapping
            S = S_s2c_updated.coalesce()
            rows, cols = S.indices()[0], S.indices()[1]
            spot2target = torch.full((S.size(0),), -1, dtype=torch.long, device=S.device)
@@ -434,10 +432,10 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
        else:
            max_prob, max_idx = max_prob_raw, max_idx_raw
    
-       # --- 颜色分配逻辑 ---
+       # --- Assign colors ---
        cell_labels = []
        for j in range(len(max_prob)):
-           # 如果 max_idx 为 -1，说明这个 Spot 不属于任何有效细胞或有效 Niche
+           # An index of -1 means this spot belongs to no valid cell or niche.
            if max_idx[j] == -1:
                cell_labels.append("filtered")
            elif max_prob[j] < 0.1:
@@ -454,7 +452,7 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
    plt.tight_layout()
    plt.show()
    
-   # 将颜色转换为 legend handles
+   # Convert colors to legend handles
    cell_type = np.asarray(celltypes)[F.softmax(emb_all["spot"], dim=1).argmax(1).cpu().numpy()]
    handles = [mpatches.Patch(color=celltype_color.get(c, "#cccccc"), label=c) for c in np.unique(cell_type)]
    figL, axL = plt.subplots(figsize=(11, 0.6)); axL.axis("off")

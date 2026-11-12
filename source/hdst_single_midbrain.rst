@@ -1,9 +1,7 @@
 Mouse midbrain (Stereo-seq)
 ================================================================================
 
-:download:`Download original notebook <examples/HDST_midbrain_run_hiNiche.ipynb>`
-
-Code and saved outputs are reproduced from this notebook. No cells are executed during documentation builds.
+:download:`Download notebook <examples/HDST_midbrain_run_hiNiche.ipynb>`
 
 .. rubric:: hiNiche: mouse midbrain Stereo-seq analysis
 

@@ -1,15 +1,15 @@
 Nuclei segmentation
 ================================================================================
 
-:download:`Download original notebook <examples/HDST_step1_build_nuclei_mask.ipynb>`
+This preparation example uses the mouse brain H&E image ``Visium_HD_Mouse_Brain_Fixed_Frozen_tissue_image.btf``.
 
-Code and saved outputs are reproduced from this notebook. No cells are executed during documentation builds.
+:download:`Download notebook <examples/HDST_step1_build_nuclei_mask.ipynb>`
 
 .. rubric:: Step 1: Nuclei segmentation with StarDist
 
 .. raw:: html
 
-   <p><strong>⚠️ Environment:</strong> run this notebook in the separate <strong><code>stardist</code></strong> environment, <strong>not</strong> the main <code>hiNiche</code> environment.</p>
+   <p><strong>⚠️ Environment:</strong> run this notebook in the separate <strong><code>hiNiche_stardist</code></strong> environment, <strong>not</strong> the main <code>hiNiche</code> environment.</p>
 
 .. raw:: html
 
@@ -18,12 +18,11 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
 .. code-block:: bash
 
    conda env create -f environment_stardist.yml
-   conda activate stardist
-   python -m ipykernel install --user --name stardist
+   conda activate hiNiche_stardist
 
 .. raw:: html
 
-   <p>Then select the <code>stardist</code> kernel for this notebook.</p>
+   <p>Then select the <code>hiNiche_stardist</code> kernel for this notebook.</p>
 
 .. raw:: html
 
@@ -35,6 +34,12 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
 .. raw:: html
 
    <p>Set <code>hd_fullres_img_btf_path</code> to the full-resolution H&amp;E image (<code>.btf</code>) of your sample. The image is read lazily as a zarr store and percentile-normalized to [0, 1].</p>
+
+.. code-block:: python
+   :linenos:
+
+   SAMPLE = "Mousebrain_HD_single_slice"
+   hd_fullres_img_btf_path = f"DATA/{SAMPLE}/Visium_HD_Mouse_Brain_Fixed_Frozen_tissue_image.btf"
 
 .. code-block:: python
    :linenos:
@@ -66,12 +71,9 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
        norm[norm > 1] = 1
        return norm
    
-   #hd_data_square_002um_path = '/Users/weihangzhang/Documents/Project/Spatial_data/HD/Mouse_Brain/binned_outputs/square_002um/' # shall contain filtered_feature_bc_matrix.h5 
-   hd_fullres_img_btf_path = "/Users/weihangzhang/Documents/Project/Spatial_data/HD/Breast_Cancer3/Visium_HD_Human_Breast_Cancer_Fixed_Frozen_tissue_image.btf"
-   
    with tiff.TiffFile(hd_fullres_img_btf_path) as tif:
        print(tif.series)
-       store = tif.series[0].aszarr()   # lazy store，不读全图
+       store = tif.series[0].aszarr()   # Lazy store; do not load the entire image
        
    z = zarr.open(store, mode="r")
    z = normalize(z)
@@ -92,7 +94,7 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
    plt.axis("off")
    plt.show()
 
-.. image:: _images/b9900c74bfde7d2d4a47750bb1a086753d0c6bacb41001152822166f4f6cb208.png
+.. image:: _images/f3eff45e0edd5a193fc250c2c156ff5b92f63e1a83ec38ec90bf09d1a8627ff4.png
    :alt: Saved result from Nuclei segmentation
    :width: 100%
 
@@ -150,13 +152,13 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
 
    .. code-block:: text
 
-      100%|██████████| 132/132 [23:20<00:00, 10.61s/it]
+      100%|██████████| 42/42 [03:45<00:00,  5.37s/it]
 
 .. container:: cell-output
 
    .. code-block:: text
 
-      Found 788559 objects
+      Found 84217 objects
 
 4. Save the segmentation mask
 --------------------------------------------------------------------------------
@@ -168,5 +170,5 @@ Code and saved outputs are reproduced from this notebook. No cells are executed 
 .. code-block:: python
    :linenos:
 
-   scipy.sparse.save_npz("/Users/weihangzhang/Documents/Project/Spatial_data/HD/Breast_Cancer_DCIS1/labels_sparse_prob_0.01_0.001.npz", labels_sparse)
+   scipy.sparse.save_npz(f"DATA/{SAMPLE}/segmentation_mask.npz", labels_sparse)
 

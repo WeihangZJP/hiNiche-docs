@@ -1,9 +1,7 @@
 Simulated tumor microenvironment
 ================================================================================
 
-:download:`Download original notebook <examples/HDST_sim_TME_run_hiNiche.ipynb>`
-
-Code and saved outputs are reproduced from this notebook. No cells are executed during documentation builds.
+:download:`Download notebook <examples/HDST_sim_TME_run_hiNiche.ipynb>`
 
 .. rubric:: hiNiche: Simulated colorectal cancer TME (simulation benchmark)
 

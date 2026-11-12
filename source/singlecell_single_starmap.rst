@@ -1,9 +1,7 @@
 STARmap
 ================================================================================
 
-:download:`Download original notebook <examples/STARmap_run_hiNiche.ipynb>`
-
-Code and saved outputs are reproduced from this notebook. No cells are executed during documentation builds.
+:download:`Download notebook <examples/STARmap_run_hiNiche.ipynb>`
 
 .. rubric:: hiNiche on single-cell spatial data (single slice): mouse V1 STARmap
 

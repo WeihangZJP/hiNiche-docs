@@ -1,7 +1,7 @@
 Installation
 ======================================================================
 
-Run from the hiNiche project directory. These environment files target Linux with an NVIDIA GPU; the hiNiche file specifies CUDA 13.2.
+Run from the hiNiche project directory. The StarDist file supports Linux, macOS, and Windows; the main hiNiche environment targets Linux with an NVIDIA GPU and CUDA 13.2.
 
 Step 1: StarDist
 ----------------------------------------------------------------------
@@ -11,8 +11,8 @@ For nuclei segmentation.
 .. code-block:: bash
 
    conda env create -f environment_stardist.yml
-   conda activate stardist
-   python -m ipykernel install --user --name stardist --display-name "StarDist"
+   conda activate hiNiche_stardist
+   python -m ipykernel install --user --name hiNiche_stardist --display-name "StarDist"
 
 Select the **StarDist** kernel for nuclei segmentation notebooks.
 

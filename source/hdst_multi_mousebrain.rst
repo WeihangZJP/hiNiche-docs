@@ -1,9 +1,7 @@
 Mouse brain
 ================================================================================
 
-:download:`Download original notebook <examples/HDST_mousebrain_run_hiNiche_multi.ipynb>`
-
-Code and saved outputs are reproduced from this notebook. No cells are executed during documentation builds.
+:download:`Download notebook <examples/HDST_mousebrain_run_hiNiche_multi.ipynb>`
 
 These source notebooks expect preprocessed files produced by preprocess_multislice.py (including meta.pkl and per-slice AnnData files). That script is not present in the supplied project directory; obtain it and prepare these inputs before running this notebook.
 

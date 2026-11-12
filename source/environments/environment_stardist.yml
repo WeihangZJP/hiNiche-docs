@@ -1,20 +1,35 @@
-# Nuclei segmentation environment (step2_build_nuclei_mask)
+# Nuclei segmentation environment (HDST_step1_build_nuclei_mask)
 # StarDist depends on TensorFlow (numpy < 2), so it is kept separate from the
 # main hiNiche environment.
 #
 #   conda env create -f environment_stardist.yml
-#   conda activate stardist
-#   python -m ipykernel install --user --name stardist
+#   conda activate hiNiche_stardist
+#   python -m ipykernel install --user --name hiNiche_stardist
 #
-# On Linux with an NVIDIA GPU, TensorFlow's CUDA libraries are installed via
-# the tensorflow[and-cuda] extra below. On macOS / CPU-only machines, replace
-# it with plain "tensorflow==2.15.1" (Apple Silicon: "tensorflow-macos==2.15.1").
-name: stardist
+# One file for both platforms -- pip picks the right TensorFlow build via
+# environment markers:
+#   * Linux (x86_64) + NVIDIA GPU : tensorflow[and-cuda] -> CUDA 12.2 / cuDNN 8.9
+#                                   come as pip wheels; only an NVIDIA driver
+#                                   >= 525 is needed on the host.
+#                                   Linux without a GPU also works (falls back to CPU).
+#   * macOS Apple Silicon (arm64) : plain tensorflow, CPU.
+#   * Windows                     : plain tensorflow, CPU only (TF >= 2.11 has
+#                                   no native Windows GPU; use WSL2 for GPU).
+#
+# TensorFlow is pinned to 2.15.x: it is the last release on Keras 2, and
+# StarDist / CSBDeep do not support Keras 3 (TF >= 2.16).
+#
+# Check the GPU is visible after install (Linux):
+#   python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+#
+# NOTE (macOS): conda env names are case-insensitive on macOS, so do not reuse
+# the name of an existing env that differs only in case (e.g. "StarDist").
+name: hiNiche_stardist
 channels:
   - conda-forge
 dependencies:
   - python=3.10
-  - numpy=1.26
+  - numpy=1.26              # TF 2.15 requires numpy < 2
   - scipy=1.13
   - matplotlib
   - scanpy=1.10
@@ -22,8 +37,10 @@ dependencies:
   - zarr=2.18
   - imagecodecs
   - ipykernel
+  - setuptools<81           # csbdeep imports pkg_resources, removed in setuptools 81
   - pip
   - pip:
-      - tensorflow[and-cuda]==2.15.1   # Keras 2; StarDist/CSBDeep are not Keras-3 ready on TF >= 2.16
+      - "tensorflow[and-cuda]==2.15.1; sys_platform == 'linux'"
+      - "tensorflow==2.15.1; sys_platform != 'linux'"
       - csbdeep==0.8.1
       - stardist==0.9.1

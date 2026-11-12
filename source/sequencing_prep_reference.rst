@@ -1,9 +1,9 @@
 Reference expression profiles
 ================================================================================
 
-:download:`Download original notebook <examples/HDST_step2_build_reference.ipynb>`
+This preparation example uses human colorectal cancer data from **GSE280318**: raw counts in ``HumanColonCancer_Flex_Multiplex_count_filtered_feature_bc_matrix.h5`` and cell annotations in ``SingleCell_MetaData.csv``.
 
-Code and saved outputs are reproduced from this notebook. No cells are executed during documentation builds.
+:download:`Download notebook <examples/HDST_step2_build_reference.ipynb>`
 
 .. code-block:: python
    :linenos:

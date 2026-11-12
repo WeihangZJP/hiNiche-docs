@@ -1,9 +1,7 @@
 Xenium
 ================================================================================
 
-:download:`Download original notebook <examples/Xenium_run_hiNiche.ipynb>`
-
-Code and saved outputs are reproduced from this notebook. No cells are executed during documentation builds.
+:download:`Download notebook <examples/Xenium_run_hiNiche.ipynb>`
 
 .. rubric:: hiNiche on single-cell spatial data (single slice): human breast cancer Xenium
 
