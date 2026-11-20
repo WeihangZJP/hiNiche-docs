@@ -1,7 +1,7 @@
 Quick start
 ================================================================================
 
-:download:`Download original notebook <examples/MouseBrain.ipynb>`
+:download:`Download notebook <examples/MouseBrain.ipynb>`
 
 .. raw:: html
 

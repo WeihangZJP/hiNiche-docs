@@ -9,5 +9,7 @@ Single slice
    hdst_single_crc
    hdst_single_midbrain
    hdst_single_sim_tme
+   hdst_single_sim_tme_noref
    hdst_single_sim_cortex
+   hdst_single_sim_cortex_noref
 
